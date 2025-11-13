@@ -1,0 +1,100 @@
+﻿@using App.Domain.Core.UserAgg.Dtos
+@model AddUserDto
+@{
+    ViewData["Title"] = "ثبت نام";
+    Layout = "";
+}
+<form asp-controller="Authentication" asp-action="SaveUser" method="post">
+    <h2>@ViewData["Title"]</h2>
+
+    <div>
+        <label asp-for="Username">نام کاربری:</label>
+        <input asp-for="Username">
+    </div>
+    <div>
+        <label asp-for="Password">رمز عبور:</label>
+        <input asp-for="Password" type="password">
+    </div>
+
+    <input type="submit" value="ثبت ‌نام">
+    <a asp-controller="Authentication" asp-action="Login" class="login-btn">بازگشت به صفحه ورود</a>
+
+</form>
+
+<style>
+    body {
+        background-color: lavender
+    }
+
+    h2 {
+        font-size: 24px;
+        text-align: center;
+        color: blueviolet;
+    }
+
+    form {
+        direction: rtl;
+        padding: 20px 30px;
+        max-width: 400px;
+        margin: 50px auto;
+    }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            color: darkviolet;
+        }
+
+        form div {
+            margin-bottom: 20px;
+        }
+
+        form input[type="text"],
+        form input[type="password"],
+        form textarea {
+            background-color: snow;
+            color: darkviolet;
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border 0.2s;
+            direction: ltr;
+            text-align: left;
+        }
+
+            form input[type="text"]:focus,
+            form input[type="password"]:focus,
+            form input:focus {
+                background-color: snow;
+                border: 1px solid mediumslateblue;
+                outline: none;
+            }
+        form input[type="submit"] {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+
+        form input[type="submit"] {
+            background-color: mediumslateblue;
+            color: snow;
+            margin-right: 10px;
+        }
+
+            form input[type="submit"]:hover {
+                background-color: slateblue;
+            }
+
+    .login-btn {
+        margin-right: 15px;
+        color: mediumslateblue;
+        text-decoration: none;
+    }
+</style>

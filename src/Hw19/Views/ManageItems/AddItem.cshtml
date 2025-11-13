@@ -1,0 +1,155 @@
+﻿@using App.Domain.Core.CategoryAgg.Dtos
+@using App.Domain.Core.ItemAgg.Dtos
+@model AddItemViewModel
+@{
+    ViewData["Title"] = "افزودن کار";
+    Layout = "";
+}
+<form asp-controller="ManageItems" asp-action="SaveItem" method="post">
+    <h2>@ViewData["Title"]</h2>
+
+    <div>
+        <label asp-for="itemDto.Title">عنوان:</label>
+        <input asp-for="itemDto.Title">
+    </div>
+    <div>
+        <label asp-for="itemDto.DueDate">مهلت:</label>
+        <input asp-for="itemDto.DueDate" type="date">
+    </div>
+    <div>
+        <label for="CategoryId">دسته‌بندی:</label>
+        <select asp-for="itemDto.CategoryId">
+            <option value="">انتخاب کنید</option>
+            @foreach (var cat in Model.cats)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="itemDto.Description">توضیحات (اختیاری):</label>
+        <input asp-for="itemDto.Description">
+    </div>
+    
+    <input type="submit" value="ثبت">
+    <input type="reset" value="تلاش دوباره" />
+    <a asp-controller="ManageItems" asp-action="Index" class="index-btn">بازگشت به مدیریت کارها</a>
+
+</form>
+
+<style>
+    body {
+        background-color: lavender
+    }
+
+    h2 {
+        font-size: 24px;
+        text-align: center;
+        color: blueviolet;
+    }
+
+    form {
+        direction: rtl;
+        padding: 20px 30px;
+        max-width: 400px;
+        margin: 50px auto;
+    }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            color: darkviolet;
+        }
+
+        form div {
+            margin-bottom: 20px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form textarea {
+            background-color: snow;
+            color: darkviolet;
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border 0.2s;
+            direction: ltr;
+            text-align: left;
+        }
+
+            form input[type="text"]:focus,
+            form input[type="date"]:focus,
+            form input:focus {
+                background-color: snow;
+                border: 1px solid mediumslateblue;
+                outline: none;
+            }
+
+        form select {
+            background-color: snow;
+            color: darkviolet;
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border 0.2s;
+            direction: rtl;
+            text-align: right;
+        }
+
+            form select:focus {
+                border: 1px solid mediumslateblue;
+                outline: none;
+                background-color: snow;
+            }
+
+        form input[type="submit"] {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+
+        form input[type="submit"] {
+            background-color: mediumslateblue;
+            color: snow;
+            margin-right: 10px;
+        }
+
+            form input[type="submit"]:hover {
+                background-color: slateblue;
+            }
+
+        form input[type="reset"] {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+        form input[type="reset"] {
+            background-color: darkred;
+            color: snow;
+            margin-right: 10px;
+        }
+
+            form input[type="reset"]:hover {
+                background-color: maroon;
+            }
+    .index-btn {
+        margin-right: 15px;
+        color: mediumslateblue;
+        text-decoration: none;
+    }
+</style>
