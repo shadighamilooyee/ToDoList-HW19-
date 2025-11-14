@@ -26,7 +26,7 @@ namespace Hw19.Controllers
             var model = new GetAndSearchItemsViewModel
             {
                 userItemsDtos = items,
-                searchItemDto = searchItem
+                searchItemDto = searchItem ?? new SearchItemDto()
             };
             ViewBag.OrderItemsEnum = Enum.GetValues(typeof(OrderItemsEnum));
             return View(model);

@@ -34,7 +34,7 @@ public class ItemRepository : IItemRepository
                 DueDate = i.DueDate,
                 CategoryName = i.Category.Name,
                 IsDone = i.IsDone
-            });
+            }).AsQueryable();
         queryable = _searchService.SearchItem(queryable, searchItem);
         queryable = _searchService.OrderItem(queryable, orderItems);
 

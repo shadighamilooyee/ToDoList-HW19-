@@ -11,11 +11,11 @@ public class SearchService : ISearchService
     {
         if (searchItem.SearchedTitle != null)
         {
-            return queryable.Where(i => i.Title.ToLower().Contains(searchItem.SearchedTitle.ToLower()));
+            queryable = queryable.Where(i => i.Title.ToLower().Contains(searchItem.SearchedTitle.ToLower()));
         }
         if (searchItem.SearchedCategory != null)
         {
-            return queryable.Where(i => i.CategoryName.ToLower().Contains(searchItem.SearchedCategory.ToLower()));
+            queryable = queryable.Where(i => i.CategoryName.ToLower().Contains(searchItem.SearchedCategory.ToLower()));
         }
         return queryable;
     }

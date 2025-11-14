@@ -16,9 +16,9 @@
 
 
 <div class="search-section">
-    <form asp-action="Index" method="get">
-        <input type="text" asp-for="searchItemDto.SearchedTitle" placeholder="جستجوی عنوان:" />
-        <input type="text" asp-for="searchItemDto.SearchedCategory" placeholder="جستجوی دسته‌بندی:" />
+    <form asp-action="Index" method="post">
+        <input type="text" name="SearchedTitle" value="@Model.searchItemDto?.SearchedTitle" placeholder="جستجوی عنوان:" />
+        <input type="text"  name="SearchedCategory" value="@Model.searchItemDto?.SearchedCategory" placeholder="جستجوی دسته‌بندی:" />
         @{
             var orderNames = new Dictionary<OrderItemsEnum, string>
                 {
