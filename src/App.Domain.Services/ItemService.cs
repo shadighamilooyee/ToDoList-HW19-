@@ -33,36 +33,8 @@ public class ItemService : IItemService
 
     public ResultDto<List<GetUserItemsDto>> UserItems(int userId, SearchItemDto searchItem, OrderItemsEnum orderItems)
     {
-        var queryable = _itemRepository.UserItems(userId);
-        queryable = SearchItem(queryable, searchItem);
-        queryable = OrderItem(queryable, orderItems);
-        var result = queryable.ToList()?? new List<GetUserItemsDto>();
-        return new ResultDto<List<GetUserItemsDto>> { IsSucceed = true, Data = result };
+        var items = _itemRepository.UserItems(userId, searchItem, orderItems);
+        return new ResultDto<List<GetUserItemsDto>> { IsSucceed = true, Data = items };
     }
-    private IQueryable<GetUserItemsDto> SearchItem(IQueryable<GetUserItemsDto> queryable, SearchItemDto searchItem)
-    {
-        if (searchItem.SearchedTitle != null)
-        {
-            return queryable.Where(i => i.Title.ToLower().Contains(searchItem.SearchedTitle.ToLower()));
-        }
-        if (searchItem.SearchedCategory != null)
-        {
-            return queryable.Where(i => i.CategoryName.ToLower().Contains(searchItem.SearchedCategory.ToLower()));
-        }
-        return queryable;
-    }
-    private IQueryable<GetUserItemsDto> OrderItem(IQueryable<GetUserItemsDto> queryable, OrderItemsEnum orderItems)
-    {
-        switch (orderItems)
-        {
-            case OrderItemsEnum.Title:
-                return queryable.OrderBy(i => i.Title);
-            case OrderItemsEnum.DueDate:
-                return queryable.OrderBy(i => i.DueDate);
-            case OrderItemsEnum.IsDone:
-                return queryable.OrderBy(i => i.IsDone);
-            default:
-                return queryable;
-        }
-    }
+    
 }

@@ -6,7 +6,7 @@ namespace App.Domain.Core.ItemAgg.Contracts;
 
 public interface IItemRepository
 {
-    IQueryable<GetUserItemsDto> UserItems(int userId);
+    List<GetUserItemsDto> UserItems(int userId, SearchItemDto searchItem, OrderItemsEnum orderItems);
     void AddItem(AddItemDto itemDto);
     void ChangeIsDone(int itemId);
     void DeleteItem(int itemId);

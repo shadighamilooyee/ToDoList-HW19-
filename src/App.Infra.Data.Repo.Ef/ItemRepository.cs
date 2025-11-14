@@ -15,13 +15,15 @@ namespace App.Infra.Data.Repo.Ef;
 public class ItemRepository : IItemRepository
 {
     private readonly AppDbContext _dbContext;
-    public ItemRepository(AppDbContext dbContext)
+    private readonly ISearchService _searchService;
+    public ItemRepository(AppDbContext dbContext, ISearchService searchService)
     {
         _dbContext = dbContext;
+        _searchService = searchService;
     }
-    public IQueryable<GetUserItemsDto> UserItems(int userId)
+    public List<GetUserItemsDto> UserItems(int userId, SearchItemDto searchItem, OrderItemsEnum orderItems)
     {
-        return _dbContext.Items
+        var queryable = _dbContext.Items
             .Where(i => i.UserId == userId)
             .Include(i => i.Category)
             .Select(i => new GetUserItemsDto
@@ -33,6 +35,10 @@ public class ItemRepository : IItemRepository
                 CategoryName = i.Category.Name,
                 IsDone = i.IsDone
             });
+        queryable = _searchService.SearchItem(queryable, searchItem);
+        queryable = _searchService.OrderItem(queryable, orderItems);
+
+        return queryable.ToList() ?? new List<GetUserItemsDto>();
     }
     public void AddItem(AddItemDto itemDto)
     {
